@@ -9,12 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Eleftherios Meletis, Konstantinos Pateras, Julio Alvarez" />
-<meta name="author" content="Matthew Denwood, Polychronis Kostoulas" />
+<meta name="author" content="Conor McAloon, Locksley Messam, Eleftherios Meletis" />
 
-<meta name="date" content="2022-10-12" />
+<meta name="date" content="2022-11-08" />
 
-<title>Bayesian Disease Measurement (BDM) - HARMONY Training School</title>
+<title>Diagnostic test evaluation with Bayesian Latent Class Models - HARMONY Training School</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1635,15 +1634,14 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Bayesian Disease Measurement (BDM) -
-HARMONY Training School</h1>
+<h1 class="title toc-ignore">Diagnostic test evaluation with Bayesian
+Latent Class Models - HARMONY Training School</h1>
 <h3 class="subtitle">Homework and software installation for the training
-school on introduction to Bayesian Disease Measurement (BDM) for Health
-scientists</h3>
-<h4 class="author">Eleftherios Meletis, Konstantinos Pateras, Julio
-Alvarez</h4>
-<h4 class="author">Matthew Denwood, Polychronis Kostoulas</h4>
-<h4 class="date">2022-10-12</h4>
+school on diagnostic test evaluation with Bayesian Latent Class
+Models</h3>
+<h4 class="author">Conor McAloon, Locksley Messam, Eleftherios
+Meletis</h4>
+<h4 class="date">2022-11-08</h4>
 
 </div>
 
@@ -1651,8 +1649,8 @@ Alvarez</h4>
 <div id="overview" class="section level1">
 <h1>Overview</h1>
 <p>This document will help you to prepare for the HARMONY training
-school on introduction to Bayesian Disease Measurement (BDM) for Health
-scientists being held in Larissa, Greece, 25 - 27 October 2022.</p>
+school on Diagnostic test evaluation with Bayesian Latent Class Models
+being held in Cork, Ireland, 17 - 18 November 2022.</p>
 <p>The event is a training school, part of the HARMONY COST Action 18208
 training activities, with introductory didactic teaching and hands-on
 practical sessions on Bayesian methods for prevalence estimation &amp;
@@ -1661,9 +1659,9 @@ computer with the necessary software installed..</p>
 <p>The following core topics will be covered:</p>
 <ol style="list-style-type: decimal">
 <li>Running basic models in JAGS</li>
-<li>Apparent &amp; true prevalence estimation</li>
-<li>How to choose a prior distribution?</li>
-<li>Diagnostic test evaluation with Hui-Walter models</li>
+<li>Introduction to Hui-Walter models</li>
+<li>Multi-population models</li>
+<li>Multi-test, multi-population models</li>
 </ol>
 <p>The purpose of this document is to ensure that you have the necessary
 software installed and access to the GitHub repository where the
@@ -1675,8 +1673,8 @@ training material will be made available.</p>
 4.1.0) from <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> and we recommend that you
 also use Rstudio which can be downloaded separately from <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></p>
 <p>Please also install the latest versions of the following R packages
-from CRAN (or using the install.packages() function): tidyverse,
-PriorGen, rjags, runjags, coda, TeachingDemos, ggmcmc</p>
+from CRAN (or using the install.packages() function): PriorGen, rjags,
+runjags, coda, TeachingDemos, MCMCpack, mada</p>
 <p>You will also need the standalone JAGS software (version 4.3.0 or
 later) for the course - download the installer for your platform from
 here: <a href="https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/" class="uri">https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/</a></p>
@@ -1684,13 +1682,13 @@ here: <a href="https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/" class
 the following code within R (or RStudio) and make sure that no errors
 are produced:</p>
 <pre class="r"><code>stopifnot(getRversion() &gt;= &quot;4.0.0&quot;)
-stopifnot(require(&#39;tidyverse&#39;))
 stopifnot(require(&#39;PriorGen&#39;))
 stopifnot(require(&#39;rjags&#39;))
 stopifnot(require(&#39;runjags&#39;))
 stopifnot(require(&#39;coda&#39;))
 stopifnot(require(&#39;TeachingDemos&#39;))
-stopifnot(require(&#39;ggmcmc&#39;))
+stopifnot(require(&#39;MCMCpack&#39;))
+stopifnot(require(&#39;mada&#39;))
 stopifnot(testjags()$JAGS.available)
 stopifnot(numeric_version(testjags()$JAGS.version) &gt;= &quot;4.3.0&quot;)
 stopifnot(testjags()$rjags.found)
@@ -1703,7 +1701,7 @@ resolve these during the summary of pre-course work session.</p>
 <h1>Access to GitHub repository</h1>
 <p>We have created a public repository containing the training material
 for the training school. This means that anyone can view the training
-material at any time via the following website: <a href="https://github.com/LefMel/HARMONY_BDM_Larissa.git" class="uri">https://github.com/LefMel/HARMONY_BDM_Larissa.git</a></p>
+material at any time via the following website: <a href="https://github.com/LefMel/HARMONY_Cork_2022_school.git" class="uri">https://github.com/LefMel/HARMONY_Cork_2022_school.git</a></p>
 <p>We will primarily be using GitHub as a way to disseminate the lecture
 notes and R/JAGS code for the exercises on course, so you only need to
 use the most basic features of GitHub.</p>
@@ -1722,8 +1720,8 @@ the presentations in pdf format and the R/JAGS scripts.</p>
 <p>We haven’t uploaded all the material for days 1, 2, 3, so make sure
 that you download all the content of the GitHub repository one day
 before the event. To download the content of the GitHub repository open
-the link (<a href="https://github.com/LefMel/HARMONY_BDM_Larissa.git" class="uri">https://github.com/LefMel/HARMONY_BDM_Larissa.git</a>) click
-on “Code” and then download ZIP.</p>
+the link (<a href="https://github.com/LefMel/HARMONY_Cork_2022_school.git" class="uri">https://github.com/LefMel/HARMONY_Cork_2022_school.git</a>)
+click on “Code” and then download ZIP.</p>
 </div>
 <div id="conclusion" class="section level1">
 <h1>Conclusion</h1>

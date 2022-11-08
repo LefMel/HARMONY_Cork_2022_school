@@ -1,14 +1,13 @@
 ---
-title: "Bayesian Disease Measurement (BDM) - HARMONY Training School"
+title: "Diagnostic test evaluation with Bayesian Latent Class Models - HARMONY Training School"
 author:
-- Eleftherios Meletis, Konstantinos Pateras, Julio Alvarez
-- Matthew Denwood, Polychronis Kostoulas
+- Conor McAloon, Locksley Messam, Eleftherios Meletis
 date: "`r Sys.Date()`"
 output:
   html_document:
     df_print: paged
   pdf_document: default
-subtitle: Homework and software installation for the training school on introduction to Bayesian Disease Measurement (BDM) for Health scientists
+subtitle: Homework and software installation for the training school on diagnostic test evaluation with Bayesian Latent Class Models
 fontsize: 12pt
 ---
 
@@ -19,16 +18,16 @@ rmarkdown::render('Session_Preparation.Rmd', 'html_document')
 
 # Overview
 
-This document will help you to prepare for the HARMONY training school on introduction to Bayesian Disease Measurement (BDM) for Health scientists being held in Larissa, Greece, 25 - 27 October 2022. 
+This document will help you to prepare for the HARMONY training school on Diagnostic test evaluation with Bayesian Latent Class Models being held in Cork, Ireland, 17 - 18 November 2022. 
 
 The event is a training school, part of the HARMONY COST Action 18208 training activities, with introductory didactic teaching and hands-on practical sessions on Bayesian methods for prevalence estimation & diagnostic test evaluation, so it is important that you are using a computer with the necessary software installed..   
 
 The following core topics will be covered:
 
 1. Running basic models in JAGS
-2. Apparent & true prevalence estimation
-3. How to choose a prior distribution? 
-4. Diagnostic test evaluation with Hui-Walter models
+2. Introduction to Hui-Walter models
+3. Multi-population models
+4. Multi-test, multi-population models
 
 The purpose of this document is to ensure that you have the necessary software installed and access to the GitHub repository where the training material will be made available.
 
@@ -36,21 +35,21 @@ The purpose of this document is to ensure that you have the necessary software i
 
 You need to install R (version 4.0.0 or later; preferably version 4.1.0) from https://cran.r-project.org/ and we recommend that you also use Rstudio which can be downloaded separately from https://www.rstudio.com/products/rstudio/download/
 
-Please also install the latest versions of the following R packages from CRAN (or using the install.packages() function):  tidyverse, PriorGen, rjags, runjags, coda, TeachingDemos, ggmcmc
+Please also install the latest versions of the following R packages from CRAN (or using the install.packages() function):  PriorGen, rjags, runjags, coda, TeachingDemos, MCMCpack, mada 
 
 You will also need the standalone JAGS software (version 4.3.0 or later) for the course - download the installer for your platform from here:  https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/
 
 To check that you have installed the software correctly please run the following code within R (or RStudio) and make sure that no errors are produced:
 
-```{r, results="hide", message=FALSE}
+```{r, results="hide", message=FALSE, warning=FALSE}
 stopifnot(getRversion() >= "4.0.0")
-stopifnot(require('tidyverse'))
 stopifnot(require('PriorGen'))
 stopifnot(require('rjags'))
 stopifnot(require('runjags'))
 stopifnot(require('coda'))
 stopifnot(require('TeachingDemos'))
-stopifnot(require('ggmcmc'))
+stopifnot(require('MCMCpack'))
+stopifnot(require('mada'))
 stopifnot(testjags()$JAGS.available)
 stopifnot(numeric_version(testjags()$JAGS.version) >= "4.3.0")
 stopifnot(testjags()$rjags.found)
@@ -61,7 +60,7 @@ If you have any difficulties installing the software or get errors from the code
 
 # Access to GitHub repository
 
-We have created a public repository containing the training material for the training school.  This means that anyone can view the training material at any time via the following website: https://github.com/LefMel/HARMONY_BDM_Larissa.git
+We have created a public repository containing the training material for the training school.  This means that anyone can view the training material at any time via the following website: https://github.com/LefMel/HARMONY_Cork_2022_school.git
 
 We will primarily be using GitHub as a way to disseminate the lecture notes and R/JAGS code for the exercises on course, so you only need to use the most basic features of GitHub.
 
@@ -71,7 +70,7 @@ In the GitHub repository for this training school you'll see four folders with n
 Within these folders you'll find the presentations in pdf format and the R/JAGS scripts.
 
 We haven't uploaded all the material for days 1, 2, 3, so make sure that you download all the content of the GitHub repository one day before the event.
-To download the content of the GitHub repository open the link (https://github.com/LefMel/HARMONY_BDM_Larissa.git) click on "Code" and then download ZIP.
+To download the content of the GitHub repository open the link (https://github.com/LefMel/HARMONY_Cork_2022_school.git) click on "Code" and then download ZIP.
 
 # Conclusion 
 
