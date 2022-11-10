@@ -1,0 +1,11 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/967874/76e32f5de53940499fd43cc32be2488e
+bundleId: https://api.rpubs.com/api/v1/document/967874/76e32f5de53940499fd43cc32be2488e
+url: http://rpubs.com/LefMel/967874
+when: 1668042158.43547
+lastSyncTime: 1668042158.43547

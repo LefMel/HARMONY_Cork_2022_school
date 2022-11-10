@@ -56,7 +56,7 @@ stopifnot(testjags()$rjags.found)
 stopifnot(numeric_version(testjags()$rjags.version) >= "4-8")
 ```
 
-If you have any difficulties installing the software or get errors from the code above, please let us know immediately so that we can resolve these during the summary of pre-course work session.
+If you have any difficulties installing the software or get errors from the code above, please let us know immediately so that we can resolve these during the course.
 
 # Access to GitHub repository
 
@@ -66,10 +66,10 @@ We will primarily be using GitHub as a way to disseminate the lecture notes and 
 
 GitHub is an online code repository that in it's most basic form stores the version history of any code project you are working on, and allows you to go back in time to a previous version before someone introduced a bug. It is particularly useful when collaborating with others because it allows you to see who made a change, when it was made, and what the code looked like before that. It also allows changes from different people to be merged into the same central repository to ensure that nobody gets out of sync with everybody else's code.
 
-In the GitHub repository for this training school you'll see four folders with names "Pre_course_material, "Day_1_Material", "Day_2_Material" and "Day_3_Material". 
+In the GitHub repository for this training school you'll see three folders with names "Pre_course_material, "Day_1_Material" and "Day_2_Material". 
 Within these folders you'll find the presentations in pdf format and the R/JAGS scripts.
 
-We haven't uploaded all the material for days 1, 2, 3, so make sure that you download all the content of the GitHub repository one day before the event.
+We haven't uploaded all the material for both days, so make sure that you download all the content of the GitHub repository one day before the event.
 To download the content of the GitHub repository open the link (https://github.com/LefMel/HARMONY_Cork_2022_school.git) click on "Code" and then download ZIP.
 
 # Conclusion 
