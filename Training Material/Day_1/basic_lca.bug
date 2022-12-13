@@ -1,0 +1,25 @@
+
+model{
+  # Likelihood part:
+  p[1] <- pi*se1*se2 + (1-pi)*(1-sp1)*(1-sp2) ###11
+  p[2] <- pi*se1*(1-se2) + (1-pi)*(1-sp1)*(sp2) ###10
+  p[3] <- pi*(1-se1)*se2 + (1-pi)*(sp1)*(1-sp2) ###01 
+  p[4] <- pi*(1-se1)*(1-se2) + (1-pi)*(sp1)*(sp2) ###00
+  
+  # Prior part:
+  pi ~ dbeta(30,70)
+  se1 ~ dbeta(90, 10)
+  se2 ~ dbeta(1, 1)
+  sp1 ~ dbeta(95, 5)
+  sp2 ~ dbeta(99, 1)
+  
+  ###likelihood of contingency tables
+  t[1:4] ~ dmulti(p[1:4], n)
+  
+  # Hooks for automatic integration with R:
+  #data# t, n
+  #monitor# pi, se1, se2, sp1, sp2
+  #inits# se1
+
+}
+

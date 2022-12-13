@@ -1,0 +1,59 @@
+model{
+
+###population 1
+  p1[1] <- pi1*se1*(se2*se3+CovSe23) + (1-pi1)*(1-sp1)*((1-sp2)*(1-sp3)+CovSp23) ###111
+  p1[2] <- pi1*se1*((1-se2)*(1-se3)+CovSe23) + (1-pi1)*(1-sp1)*(sp2*sp3+CovSp23) ###100
+  
+  p1[3] <- pi1*(1-se1)*(se2*(1-se3)-CovSe23) + (1-pi1)*sp1*((1-sp2)*sp3-CovSp23) ###010 
+  p1[4] <- pi1*(1-se1)*((1-se2)*se3-CovSe23) + (1-pi1)*sp1*(sp2*(1-sp3)-CovSp23) ##001
+  
+  p1[5] <- pi1*se1*(se2*(1-se3)-CovSe23) + (1-pi1)*(1-sp1)*((1-sp2)*sp3-CovSp23) ###110
+  p1[6] <- pi1*se1*((1-se2)*se3-CovSe23) + (1-pi1)*(1-sp1)*(sp2*(1-sp3)-CovSp23) ##101
+  
+  p1[7] <- pi1*(1-se1)*(se2*se3+CovSe23) + (1-pi1)*sp1*((1-sp2)*(1-sp3)+CovSp23)  ###011
+  p1[8] <- pi1*(1-se1)*((1-se2)*(1-se3)+CovSe23) + (1-pi1)*sp1*(sp2*sp3+CovSp23) ###000
+  
+  ##population 2
+  p2[1] <- pi2*se1*(se2*se3+CovSe23) + (1-pi2)*(1-sp1)*((1-sp2)*(1-sp3)+CovSp23) ###111
+  p2[2] <- pi2*se1*((1-se2)*(1-se3)+CovSe23) + (1-pi2)*(1-sp1)*(sp2*sp3+CovSp23) ###100
+  
+  p2[3] <- pi2*(1-se1)*(se2*(1-se3)-CovSe23) + (1-pi2)*sp1*((1-sp2)*sp3-CovSp23) ###010 
+  p2[4] <- pi2*(1-se1)*((1-se2)*se3-CovSe23) + (1-pi2)*sp1*(sp2*(1-sp3)-CovSp23) ##001
+  
+  p2[5] <- pi2*se1*(se2*(1-se3)-CovSe23) + (1-pi2)*(1-sp1)*((1-sp2)*sp3-CovSp23) ###110
+  p2[6] <- pi2*se1*((1-se2)*se3-CovSe23) + (1-pi2)*(1-sp1)*(sp2*(1-sp3)-CovSp23) ##101
+  
+  p2[7] <- pi2*(1-se1)*(se2*se3+CovSe23) + (1-pi2)*sp1*((1-sp2)*(1-sp3)+CovSp23)  ###011
+  p2[8] <- pi2*(1-se1)*((1-se2)*(1-se3)+CovSe23) + (1-pi2)*sp1*(sp2*sp3+CovSp23) ###000
+
+  
+  ###likelihood of contingency tables
+  t1[1:8] ~ dmulti(p1[1:8], n1)
+  t2[1:8] ~ dmulti(p2[1:8], n2)
+  
+      # Prior part:
+  pi1 ~ dbeta(1, 3)
+  pi2 ~ dbeta(2, 2)
+  se1 ~ dbeta(2, 2)
+  se2 ~ dbeta(2, 2)
+  se3 ~ dbeta(2, 2)
+  sp1 ~ dbeta(99, 1)
+  sp2 ~ dbeta(95, 5)
+  sp3 ~ dbeta(95, 5)
+  
+alpha.CovSe23 <- max(-(1-se2)*(1-se3), -se2*se3)
+beta.CovSe23 <- min(se2*(1-se3), se3*(1-se2))
+
+gamma.CovSp23 <- max(-(1-sp2)*(1-sp3), -sp2*sp3)
+delta.CovSp23 <- min(sp2*(1-sp3), sp3*(1-sp2))
+
+CovSe23 ~ dunif(alpha.CovSe23, beta.CovSe23)
+CovSp23 ~ dunif(gamma.CovSp23, delta.CovSp23)
+  
+    # Hooks for automatic integration with R:
+  #data# t1, t2, n1, n2
+  #monitor# pi1, pi2, se1, se2, se3, sp1, sp2, sp3, CovSe23, CovSp23
+  #inits# se2
+
+  }
+  

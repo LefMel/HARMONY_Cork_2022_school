@@ -1,0 +1,34 @@
+
+model{
+  # Likelihood part:
+  
+  ##population 1
+  p1[1] <- pi1*se1*se2 + (1-pi1)*(1-sp1)*(1-sp2) ###11
+  p1[2] <- pi1*se1*(1-se2) + (1-pi1)*(1-sp1)*(sp2) ###10
+  p1[3] <- pi1*(1-se1)*se2 + (1-pi1)*(sp1)*(1-sp2) ###01 
+  p1[4] <- pi1*(1-se1)*(1-se2) + (1-pi1)*(sp1)*(sp2) ###00
+  
+  ##population 2
+  p2[1] <- pi2*se1*se2 + (1-pi2)*(1-sp1)*(1-sp2) ###11
+  p2[2] <- pi2*se1*(1-se2) + (1-pi2)*(1-sp1)*(sp2) ###10
+  p2[3] <- pi2*(1-se1)*se2 + (1-pi2)*(sp1)*(1-sp2) ###01 
+  p2[4] <- pi2*(1-se1)*(1-se2) + (1-pi2)*(sp1)*(sp2) ###00
+  
+    ###likelihood of contingency tables
+  t1[1:4] ~ dmulti(p1[1:4], n1)
+  t2[1:4] ~ dmulti(p2[1:4], n2)
+  
+    # Prior part:
+  pi1 ~ dbeta(3, 7)
+  pi2 ~ dbeta(2.5, 7.5)
+  se1 ~ dbeta(1, 1)
+  se2 ~ dbeta(1, 1)
+  sp1 ~ dbeta(90, 10)
+  sp2 ~ dbeta(90, 10)
+  
+    # Hooks for automatic integration with R:
+  #data# t1, t2, n1, n2
+  #monitor# pi1, pi2, se1, se2, sp1, sp2
+  #inits# se1
+
+  }

@@ -1,0 +1,12 @@
+model{
+  # Likelihood part:
+  Positives ~ dbinom(prevalence, TotalTests)
+  
+  # Prior part:
+  prevalence ~ dbeta(2, 2)
+  
+  # Hooks for automatic integration with R:
+  #data# Positives, TotalTests
+  #monitor# prevalence
+  #inits# prevalence
+}
